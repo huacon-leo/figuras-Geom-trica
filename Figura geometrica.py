@@ -1,37 +1,47 @@
-# Clase base FiguraGeometrica
 class FiguraGeometrica:
-    def __init__(self, ancho, alto):
-        self.ancho = ancho
-        self.alto = alto
+    def __init__(self, alto=0, ancho=0):
+        self._alto = alto
+        self._ancho = ancho
 
-    def area(self):
-        raise NotImplementedError("Este método debe ser implementado por una subclase")
+    def get_alto(self):
+        return self._alto
 
-    def perimetro(self):
-        raise NotImplementedError("Este método debe ser implementado por una subclase")
+    def set_alto(self, alto):
+        self._alto = alto
 
+    def get_ancho(self):
+        return self._ancho
 
-# Clase Rectángulo que hereda de FiguraGeometrica
-class Rectangulo(FiguraGeometrica):
-    def __init__(self, ancho, alto):
-        super().__init__(ancho, alto)
+    def set_ancho(self, ancho):
+        self._ancho = ancho
 
-    def area(self):
-        return self.ancho * self.alto
+    def __str__(self):
+        return f'Alto: {self._alto}, Ancho: {self._ancho}'
 
-    def perimetro(self):
-        return 2 * (self.ancho + self.alto)
-
-
-# Clase Cuadrado que hereda de Rectángulo
-class Cuadrado(Rectangulo):
+class Cuadrado(FiguraGeometrica):
     def __init__(self, lado):
-        super().__init__(lado, lado)  # Un cuadrado es un rectángulo con lados iguales
+        super().__init__(lado, lado)
 
+    def area(self):
+        return self._alto * self._ancho
 
-# Crear instancias
-rectangulo = Rectangulo(4, 6)
-cuadrado = Cuadrado(5)
+    def __str__(self):
+        return f'Cuadrado de lado {self._alto}, área {self.area()}'
 
-print(f"Rectángulo: Área = {rectangulo.area()}, Perímetro = {rectangulo.perimetro()}")
-print(f"Cuadrado: Área = {cuadrado.area()}, Perímetro = {cuadrado.perimetro()}")
+class Rectangulo(FiguraGeometrica):
+    def __init__(self, alto, ancho):
+        super().__init__(alto, ancho)
+
+    def area(self):
+        return self._alto * self._ancho
+
+    def __str__(self):
+        return f'Rectángulo de alto {self._alto}, ancho {self._ancho}, área {self.area()}'
+
+if __name__ == "__main__":
+    cuadrado = Cuadrado(7)
+    print(cuadrado)
+
+    rectangulo = Rectangulo(4, 6)
+    print(rectangulo)
+
