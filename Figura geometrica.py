@@ -45,3 +45,4 @@ if __name__ == "__main__":
     rectangulo = Rectangulo(4, 6)
     print(rectangulo)
 
+
